@@ -10,7 +10,7 @@
   <zcml:include package=".browser.tests" />
 
   <genericsetup:registerProfile
-      name="plone.htmx"
+      name="testing"
       title="HTMX tests"
       directory="profiles/testing"
       description="HTMX browser layer and more"

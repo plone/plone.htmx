@@ -25,7 +25,7 @@
     />
 
   <genericsetup:registerProfile
-      name="plone.htmx"
+      name="default"
       title="HTMX"
       directory="profiles/default"
       description="HTMX browser layer and more"
