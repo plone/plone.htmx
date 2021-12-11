@@ -1,0 +1,5 @@
+<form class="htmx editTitle" tal:attributes="action string:${context/absolute_url}/edit_title">
+<input type="text" tal:attributes="value context/Title" name="title" />
+<button>Save</button>
+<button hx-target="form.htmx.editTitle" hx-get="htmx_title">Cancel</button>
+</form>

@@ -1,0 +1,4 @@
+<h1 class="htmx title">
+<span tal:content="context/Title">HTMX</span>
+<button hx-get="replace_button" hx-swap="outerHTML" hx-target="h1.htmx.title">Edit title</button>
+</h1>

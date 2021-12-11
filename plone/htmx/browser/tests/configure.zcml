@@ -12,12 +12,20 @@
       layer="plone.htmx.interfaces.IPloneHtmxLayer"
       permission="zope2.View">
     <browser:page
-        name="htmx"
-        template="test.pt"
+        name="htmx_view"
+        template="htmx_view.pt"
         />
     <browser:page
         name="replace_button"
-        attribute="replace_button"
+        template="replace_button.pt"
+        />
+    <browser:page
+        name="edit_title"
+        attribute="edit_title"
+        />
+    <browser:page
+        name="htmx_title"
+        template="title.pt"
         />
   </browser:pages>
 
