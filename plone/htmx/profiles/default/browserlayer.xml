@@ -1,0 +1,6 @@
+<layers>
+  <layer
+    name="plone.htmx"
+    interface="plone.htmx.interfaces.IPloneHtmxLayer"
+    />
+</layers>

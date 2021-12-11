@@ -1,0 +1,2 @@
+<script type="text/javascript" 
+        tal:attributes="src string:${view/portal_url}/++resource++htmx.js"></script>
