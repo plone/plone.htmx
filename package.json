@@ -1,0 +1,27 @@
+{
+  "name": "plone.htmx",
+  "version": "0.1.0",
+  "description": "HTMX support in Plone",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plone/plone.htmx.git"
+  },
+  "author": "",
+  "license": "GPL3",
+  "bugs": {
+    "url": "https://github.com/plone/plone.htmx/issues"
+  },
+  "homepage": "https://github.com/plone/plone.htmx#readme",
+  "dependencies": {
+    "cypress": "^9.1.1"
+  }
+}
