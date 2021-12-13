@@ -17,7 +17,11 @@ describe('HTMX view', () => {
     cy.get('input[name="title"]').should('have.focus')
     cy.get('input[name="title"]').type('{selectall}Cypress')
     cy.contains('Save').click()
-    cy.get('li.selected').contains('Cypress')
+    if (Cypress.env('PLONE_VERSION') == '5.1') {
+        cy.get('li.selected').contains('Cypress')
+    } else {
+        cy.get('li.current').contains('Cypress')
+    }
     cy.get('#breadcrumbs-current').contains('Cypress')
     cy.contains('Cypress')
     cy.contains('Edit title').click()
