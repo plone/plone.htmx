@@ -8,7 +8,7 @@ describe('HTMX view', () => {
     cy.contains('Edit title').click()
     cy.get('input[name="title"]').should('have.focus')
     cy.contains('Cancel').click()
-    cy.contains('Actualités')
+    cy.contains('News')
   })
 
   it('Edit title and save', () => {
@@ -22,7 +22,7 @@ describe('HTMX view', () => {
     cy.contains('Cypress')
     cy.contains('Edit title').click()
     cy.get('input[name="title"]').should('have.focus')
-    cy.get('input[name="title"]').type('{selectall}Actualités')
+    cy.get('input[name="title"]').type('{selectall}News')
     cy.contains('Save').click()
   })
 })
