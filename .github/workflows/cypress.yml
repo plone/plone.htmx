@@ -25,28 +25,22 @@ jobs:
           restore-keys: |
             ubuntu-3.12-plone-6.1-eggs-
 
-      - name: Install buildout
+      - name: Install buildout and run it
         run: |
-          pip install --upgrade pip zc.buildout setuptools
-          buildout -Nv
+          pip install --upgrade pip "zc.buildout==5.2.0" "setuptools==81.0.0"
+          buildout -v
 
-      - name: Create Plone site
-        run: |
-          bin/instance start
-          sleep 20
-          curl -s -u admin:admin -X POST http://localhost:8080/@@ploneAddSite \
-            -d "site_id=Plone&distribution=classic&submit=Submit" || true
-          sleep 5
-
-      - name: Run Cypress tests
+      - name: Create Plone site and run Cypress tests
         uses: cypress-io/github-action@v6
         with:
-          wait-on: "http://localhost:8080/Plone"
-          wait-on-timeout: 60
+          start: bin/instance fg
+          wait-on: "http://localhost:8080"
+          wait-on-timeout: 120
           spec: cypress/integration/edit_title.spec.js
+          browser: chrome
         env:
           CYPRESS_PLONE_HOST: localhost:8080
 
       - name: Stop Zope
         if: always()
-        run: bin/instance stop || true
+        run: kill $(lsof -t -i:8080) 2>/dev/null || true
