@@ -1,39 +1,52 @@
 name: Cypress Tests
 
-on: [push]
+on:
+  push:
+    branches: ["**"]
+  pull_request:
 
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        plone-version: ["5.1", "5.2"]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
         with:
-          python-version: 2.7
-      - name: Cache eggs
-        uses: actions/cache@v1.2.0
+          python-version: "3.12"
+
+      - name: Cache buildout eggs
+        uses: actions/cache@v4
         with:
           path: eggs
-          key: ubuntu-2.7-plone-${{ matrix.plone-version }}-eggs
-      - name: Buildout
+          key: ubuntu-3.12-plone-6.1-eggs-${{ hashFiles('buildout.cfg') }}
+          restore-keys: |
+            ubuntu-3.12-plone-6.1-eggs-
+
+      - name: Install buildout
         run: |
-          pip install -r requirements_dev.txt
-          buildout -Nv extends=https://dist.plone.org/release/${{ matrix.plone-version }}-latest/versions.cfg
-      - name: Run Zope
+          pip install --upgrade pip zc.buildout setuptools
+          buildout -Nv
+
+      - name: Create Plone site
         run: |
           bin/instance start
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
+          sleep 20
+          curl -s -u admin:admin -X POST http://localhost:8080/@@ploneAddSite \
+            -d "site_id=Plone&distribution=classic&submit=Submit" || true
+          sleep 5
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v6
         with:
-          wait-on: 'http://localhost:8080'
-          wait-on-timeout: 120
+          wait-on: "http://localhost:8080/Plone"
+          wait-on-timeout: 60
           spec: cypress/integration/edit_title.spec.js
-          env: PLONE_VERSION=${{ matrix.plone-version }}
+        env:
+          CYPRESS_PLONE_HOST: localhost:8080
+
+      - name: Stop Zope
+        if: always()
+        run: bin/instance stop || true
