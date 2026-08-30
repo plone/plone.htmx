@@ -24,7 +24,7 @@ classifiers = [
     "Framework :: Plone",
     "Framework :: Plone :: 6.1",
 ]
-python_requires = ">=3.10"
+requires-python = ">=3.10"
 dependencies = []
 
 [project.optional-dependencies]
