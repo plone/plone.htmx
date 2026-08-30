@@ -4,7 +4,7 @@ __title__ = "plone.htmx"
 __summary__ = "HTMX support in Plone"
 __url__ = "https://github.com/gotcha/plone.htmx"
 
-__version__ = "0.1.0"
+__version__ = "0.2.0.dev0"
 
 __author__ = "Godefroid Chapelle"
 __email__ = "gotcha@bubblenet.be"
