@@ -27,18 +27,17 @@ jobs:
 
       - name: Install buildout and run it
         run: |
-          pip install --upgrade pip "zc.buildout==5.2.0" "setuptools==81.0.0"
+          pip install --upgrade pip "zc.buildout==4.2.0" "setuptools==81.0.0"
           buildout -v
 
       - name: Start Zope and create Plone site
         run: |
           bin/instance start
-          # Wait for Zope to be ready
           for i in $(seq 1 30); do
             curl -sf http://localhost:8080 && break || sleep 4
           done
-          # Create the Plone site
-          curl -sf -u admin:admin             "http://localhost:8080/@@ploneAddSite?site_id=Plone&distribution=classic&submit=Submit" ||           curl -sf -u admin:admin -X POST http://localhost:8080/@@ploneAddSite             -d "site_id=Plone&distribution=classic&submit=Submit"
+          curl -sf -u admin:admin -X POST http://localhost:8080/@@ploneAddSite \
+            -d "site_id=Plone&distribution=classic&submit=Submit" || true
           sleep 3
 
       - name: Run Cypress tests
