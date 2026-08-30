@@ -29,7 +29,12 @@ dependencies = []
 
 [project.optional-dependencies]
 docs = ["sphinx", "furo"]
-tests = ["pytest"]
+tests = [
+    "pytest",
+    "pytest-plone>=0.5.0",
+    "plone.app.testing",
+    "plone.testing",
+]
 
 [project.urls]
 Homepage = "https://github.com/plone/plone.htmx"
@@ -48,3 +53,6 @@ include = ["plone*"]
     "*.zcml",
     "*.xml",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["plone/htmx/tests"]
