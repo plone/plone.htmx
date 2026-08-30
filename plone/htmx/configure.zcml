@@ -32,13 +32,20 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
-   <browser:viewlet
-       name="htmx.head_link"
-       manager="plone.app.layout.viewlets.interfaces.IHtmlHead"
-       template="browser/head_link.pt"
-       class="plone.app.layout.viewlets.common.ViewletBase"
-       layer=".interfaces.IPloneHtmxLayer"
-       permission="zope2.View"
-       />
+  <browser:viewlet
+      name="htmx.head_link"
+      manager="plone.app.layout.viewlets.interfaces.IHtmlHead"
+      template="browser/head_link.pt"
+      class="plone.app.layout.viewlets.common.ViewletBase"
+      layer=".interfaces.IPloneHtmxLayer"
+      permission="zope2.View"
+      />
+
+  <!-- Step 3: Mark HTMX requests with IHtmxRequest via BeforeTraverse subscriber -->
+  <subscriber
+      for="OFS.interfaces.ITraversable
+           zope.traversing.interfaces.IBeforeTraverseEvent"
+      handler=".events.mark_as_htmx_request"
+      />
 
 </configure>
