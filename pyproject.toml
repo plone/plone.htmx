@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "plone.htmx"
+version = "0.2.0.dev0"
+description = "HTMX support in Plone"
+readme = "README.rst"
+license = {text = "GNU General Public License v3"}
+authors = [
+    {name = "Godefroid Chapelle", email = "gotcha@bubblenet.be"},
+]
+keywords = ["plone", "htmx"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Framework :: Plone",
+    "Framework :: Plone :: 6.1",
+]
+python_requires = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+docs = ["sphinx", "furo"]
+tests = ["pytest"]
+
+[project.urls]
+Homepage = "https://github.com/plone/plone.htmx"
+"Bug Tracker" = "https://github.com/plone/plone.htmx/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["plone*"]
+
+[tool.setuptools.package-data]
+"plone.htmx" = [
+    "static/*",
+    "profiles/**/*",
+    "browser/**/*.pt",
+    "browser/**/*.zcml",
+    "*.zcml",
+    "*.xml",
+]
