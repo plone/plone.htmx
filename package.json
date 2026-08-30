@@ -1,27 +1,22 @@
 {
   "name": "plone.htmx",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "HTMX support in Plone",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs",
-    "lib": "lib",
-    "test": "tests"
-  },
   "scripts": {
-    "test": "cypress open"
+    "test": "cypress open",
+    "test:ci": "cypress run"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/plone/plone.htmx.git"
   },
-  "author": "",
-  "license": "GPL3",
+  "author": "Godefroid Chapelle",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/plone/plone.htmx/issues"
   },
   "homepage": "https://github.com/plone/plone.htmx#readme",
-  "dependencies": {
-    "cypress": "^9.1.1"
+  "devDependencies": {
+    "cypress": "^15.0.0"
   }
 }
